@@ -1,1 +1,121 @@
 
+//USO DE TRY-CATCH
+//CÓDIGO SUCIO
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace PruebaExcepcion1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.Write("Ingrese un valor:");
+            string linea = Console.ReadLine();
+            var num = int.Parse(linea);
+            var cuadrado = num * num;
+            Console.WriteLine($"El cuadrado de {num} es {cuadrado}");
+            Console.ReadKey();
+        }
+    }
+}
+
+//CLEAN CODE
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace PruebaExcepcion1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            bool continua;
+            do
+            {
+                try
+                {
+                    continua = false;
+                    Console.Write("Ingrese un valor:");
+                    string linea = Console.ReadLine();
+                    var num = int.Parse(linea);
+                    var cuadrado = num * num;
+                    Console.WriteLine($"El cuadrado de {num} es {cuadrado}");
+                }
+                catch (FormatException e)
+                {
+                    Console.WriteLine("Debe ingresar obligatoriamente un número entero.");
+                    continua = true;
+                }
+            } while (continua);
+            Console.ReadKey();
+        }
+
+    }
+}
+
+// CÓDIGO DUPLICADO Y CODIGO FLECHA
+
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+      Console.WriteLine("1. Calcular área de un círculo");
+           Console.WriteLine("2. Calcular área de un rectángulo");
+
+              int opcion = int.Parse(Console.ReadLine());
+
+                 if (opcion == 1)
+                   {
+                     Console.Write("Ingrese el radio del círculo: ");
+                         double radio = double.Parse(Console.ReadLine());
+                               double area = Math.PI * Math.Pow(radio, 2);
+                                    Console.WriteLine($"El área del círculo es: {area}");
+                                      }
+                                        else if (opcion == 2)
+                                         {
+                                           Console.Write("Ingrese la base del rectángulo: ");
+                                              double baseRectangulo = double.Parse(Console.ReadLine());
+                                                  Console.Write("Ingrese la altura del rectángulo: ");
+                                                     double alturaRectangulo = double.Parse(Console.ReadLine());
+                                                        double area = baseRectangulo * alturaRectangulo;
+                                                            Console.WriteLine($"El área del rectángulo es: {area}");
+                                                                    }
+                                                                      else
+                                                                          {
+                                                                            Console.WriteLine("Opción no válida.");
+                                                                               }
+                                                                                  }
+                                                                                     }
+                                                                                     
+// EXCESOS DE PARAMETROS
+
+includeSetupPage() //UN SOLO PARAMETRO
+
+includeSetupPageInto(newPage Content) // MAS DE UN PARAMETRO
+
+// FUNCIONES HACIENDO DOS COSAS DIFERENTES
+
+float getFinalSaleAmount(Product product, int cant, boolean applyIVA) 
+{ 
+float amount = product.getPrice() * cant; 
+if(applyIVA) amount *= 1.21; 
+return amount; 
+} 
+//FUNCIONES HACIENDO UNA SOLA COSA
+float getSaleAmount(Product product, int cant){ 
+return product.getPrice() * cant; 
+} 
+float getSaleAmountWithIVA(Product product, int cant){ 
+return getSaleAmount(product, cant) * 1.21; 
+}
